@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vote-app-deploy
+  labels:
+    name: vote-app-pod
+    app: voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: vote-app-pod
+      app: voting-app
+  template:
+    metadata:
+      name: vote-app-pod
+      labels:
+        name: vote-app-pod
+        app: voting-app
+    spec:
+      containers:
+      - name: vote-app
+        image: fvnilo/vote-app
+        # This is to use images in the minikube cache. Otherwise it will try to download the image.
+        imagePullPolicy: IfNotPresent 
